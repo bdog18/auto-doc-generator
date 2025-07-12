@@ -25,6 +25,16 @@ class PythonParser:
                         line_number=node.lineno,
                     )
                 )
+            elif isinstance(node, ast.ClassDef):
+                classes.append(
+                    CodeElement(
+                        name=node.name,
+                        type="class",
+                        source_code=self._get_source(node, content),
+                        docstring=ast.get_docstring(node),
+                        line_number=node.lineno,
+                    )
+                )
 
         return FileAnalysis(file_path=file_path, functions=functions, classes=classes)
 
@@ -38,3 +48,15 @@ class PythonParser:
                 ]
             )
         return ""
+
+
+if __name__ == "__main__":
+    # Example usage
+    parser = PythonParser()
+    analysis = parser.parse_file(
+        Path("C:\\Users\\Brend\\Documents\\repos\\doc-generator-agent\\tests\\test.py")
+    )  # Replace with your file path
+    # print(analysis)
+    for func in analysis.functions:
+        print(f"Function: {func.name}, Docstring: {func.docstring}")
+        print(f"Source Code:\n{func.source_code}\n")
