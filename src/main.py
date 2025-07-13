@@ -6,11 +6,17 @@ from src.utils.doc_insertion import find_closing_paren
 
 
 def main() -> None:
+    """
+    Processes Python files in the ./src directory to generate and insert missing function docstrings using an LLM client.
+
+    Returns:
+        None: This function does not return a value.
+    """
     # Find Python files
     parser = PythonParser()
     llm_client = LLMClientFactory().create_client("openai")
 
-    for py_file in Path("./tests").glob("**/*.py"):
+    for py_file in Path("./src").glob("**/*.py"):
         if py_file.name.startswith("test_"):
             continue
 
@@ -21,8 +27,6 @@ def main() -> None:
         for func in sorted(
             analysis.functions, key=lambda x: x.line_number, reverse=True
         ):
-            if func.name.startswith("generate_docs"):
-                continue
             if not func.docstring:  # Only generate if missing
                 docs = llm_client.generate_docs(func)
                 print(f"Generated docs for {func.name}")

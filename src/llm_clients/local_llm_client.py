@@ -7,14 +7,42 @@ from src.llm_clients.base_llm_client import LLMClient
 
 class OllamaClient(LLMClient):
     def __init__(self, model: str = "deepseek-coder") -> None:
+        """
+        Initializes the instance with a specified model and base URL.
+        
+        Args:
+            model (str): The model name to use.
+        
+        Returns:
+            None: This constructor does not return a value.
+        """
         self.model = model
         self.base_url = "http://localhost:11434"
 
     def is_available(self) -> bool:
+        """
+        Checks if Ollama is available.
+        
+        Returns:
+            bool: True if Ollama is available, False otherwise.
+        """
         # Implement logic to check if Ollama is available
         return True  # Placeholder for actual availability check
 
     def generate_docs(self, code_element: CodeElement) -> str:
+        """
+        Generates a clean Python docstring for the given function code element. 
+        
+        Args:
+            code_element (CodeElement): The code element containing the source code to document.
+        
+        Returns:
+            str: The generated docstring in Google style format.
+        
+        Example:
+            >>> generate_docs(code_element)
+            '"""Brief description.\n\nArgs:\n    code_element (CodeElement): The code element containing the source code.\n\nReturns:\n    str: The generated docstring."""'
+        """
         prompt = f"""
             Generate ONLY a clean Python docstring for this function. 
             Return the docstring content without triple quotes.

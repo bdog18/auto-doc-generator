@@ -21,6 +21,15 @@ class ParserFactory:
 
     @classmethod
     def get_parser(cls, file_path: Path) -> Optional[Any]:
+        """
+        Returns an instance of the parser corresponding to the file extension. 
+        
+        Args:
+            file_path (Path): Path object representing the file.
+        
+        Returns:
+            Optional[Any]: Instance of the parser class if found, otherwise None.
+        """
         extension = file_path.suffix.lower()
         parser_class = cls.PARSERS.get(extension)
         if parser_class:

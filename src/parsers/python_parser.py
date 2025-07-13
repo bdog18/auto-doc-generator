@@ -7,6 +7,16 @@ from src.core.analyzer import CodeElement, FileAnalysis
 
 class PythonParser:
     def parse_file(self, file_path: Path) -> FileAnalysis:
+        """
+        Parses a Python file to extract functions and classes with their metadata.
+        Returns a FileAnalysis object containing the parsed elements.
+
+        Args:
+            file_path (Path): Path to the Python file to parse.
+
+        Returns:
+            FileAnalysis: Object containing lists of functions and classes found.
+        """
         with open(file_path, "r") as f:
             content = f.read()
 
@@ -39,6 +49,16 @@ class PythonParser:
         return FileAnalysis(file_path=file_path, functions=functions, classes=classes)
 
     def _get_source(self, node: ast.AST, content: str) -> str:
+        """
+        Extract source code segment corresponding to an AST node from the given content.
+
+        Args:
+            node (ast.AST): The AST node to extract source for.
+            content (str): The full source code as a string.
+
+        Returns:
+            str: The source code segment for the node, or an empty string if unavailable.
+        """
         lines = content.split("\n")
         if hasattr(node, "lineno") and hasattr(node, "end_lineno"):
             return "\n".join(
