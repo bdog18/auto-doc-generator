@@ -1,5 +1,5 @@
 # src/utils/local_llm_client.py
-import openai
+from openai import OpenAI
 
 from src.config.settings import settings
 from src.core.analyzer import CodeElement
@@ -8,7 +8,8 @@ from src.llm_clients.base_llm_client import LLMClient
 
 class OpenAIClient(LLMClient):
     def __init__(self) -> None:
-        openai.api_key = settings.openai_api_key
+        self.client = OpenAI()
+        self.client.api_key = str(settings.openai_api_key)
 
     def is_available(self) -> bool:
         # Implement logic to check if OpenAI is available
@@ -49,7 +50,7 @@ class OpenAIClient(LLMClient):
             Generate docstring now:
             """
 
-        response = openai.chat.completions.create(
+        response = self.client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[{"role": "user", "content": prompt}],
             max_tokens=settings.max_tokens,
