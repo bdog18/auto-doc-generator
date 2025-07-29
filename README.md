@@ -156,28 +156,28 @@ Test files include:
 
 ```
 auto-doc-generator/
-├── LICENSE                    # MIT License
-├── README.md                 # This file
-├── pyproject.toml           # Project configuration
-├── requirements.txt         # Python dependencies
-├── src/                     # Source code
-│   ├── main.py             # Entry point
-│   ├── config/             # Configuration
-│   │   └── settings.py     # App settings
-│   ├── core/               # Core models
-│   │   └── analyzer.py     # Code analysis data models
-│   ├── llm_clients/        # LLM integrations
+├── LICENSE                       # MIT License
+├── README.md                     # This file
+├── pyproject.toml                # Project configuration
+├── requirements.txt              # Python dependencies
+├── src/                          # Source code
+│   ├── main.py                   # Entry point
+│   ├── config/                   # Configuration
+│   │   └── settings.py           # App settings
+│   ├── core/                     # Core models
+│   │   └── analyzer.py           # Code analysis data models
+│   ├── llm_clients/              # LLM integrations
 │   │   ├── base_llm_client.py
 │   │   ├── api_llm_client.py
 │   │   ├── local_llm_client.py
 │   │   └── llm_client_factory.py
-│   ├── parsers/            # Code parsers
+│   ├── parsers/                  # Code parsers
 │   │   ├── python_parser.py
 │   │   ├── javascript_parser.py  # Planned
 │   │   └── parser_factory.py
-│   └── utils/              # Utilities
+│   └── utils/                    # Utilities
 │       └── doc_insertion.py
-└── tests/                  # Test suite
+└── tests/                        # Test suite
     ├── test_python_parser.py
     ├── test_llm_client_factory.py
     └── test_doc_insertion.py
