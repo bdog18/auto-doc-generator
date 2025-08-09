@@ -7,22 +7,23 @@ class LLMClient(ABC):
     @abstractmethod
     def generate_docs(self, code_element: CodeElement) -> str:
         """
-        Generates documentation for the given code element.
+        Generates a documentation string for the given code element.
         
         Args:
-            code_element (CodeElement): The code element to document.
+            self (object): The instance of the class containing the method.
+            code_element (CodeElement): The code element to generate documentation for.
         
         Returns:
-            str: The generated documentation string.
+            str: A generated documentation string in a specified format.
         """
         pass
 
     @abstractmethod
     def is_available(self) -> bool:
         """
-        Checks if the resource is currently available.
+        Determines if the service is available.
         
         Returns:
-            bool: True if available, False otherwise.
+            bool: True if the service is available, False otherwise.
         """
         pass

@@ -9,33 +9,37 @@ from src.llm_clients.base_llm_client import LLMClient
 class OpenAIClient(LLMClient):
     def __init__(self) -> None:
         """
-        Initializes the OpenAI client with the API key from settings.
+        Initializes a client for interacting with the OpenAI API using the specified API key from settings.
+        
+        Args:
+            self: The instance of the class being initialized.
         
         Returns:
-            None: This constructor does not return a value.
+            None
         """
         self.client = OpenAI()
         self.client.api_key = str(settings.openai_api_key)
 
     def is_available(self) -> bool:
         """
-        Checks if OpenAI service is currently available.
+        Checks if OpenAI is available by implementing a placeholder logic to return True.
         
         Returns:
-            bool: True if available, False otherwise.
+            bool: Indicates whether OpenAI is available.
         """
         # Implement logic to check if OpenAI is available
         return True  # Placeholder for actual availability check
 
     def generate_docs(self, code_element: CodeElement) -> str:
         """
-        Generates a clean Python docstring for the given function code element using a language model. 
+        Generates a clean Python docstring for the provided function based on its name and source code.
         
         Args:
-            code_element (CodeElement): The code element containing the function's name and source code.
+            self: The instance of the class containing the function.
+            code_element (CodeElement): An object representing the function's code element, including its name and source code.
         
         Returns:
-            str: The generated docstring with triple quotes.
+            str: A formatted docstring for the given function.
         """
         prompt = f"""
             Generate ONLY a clean Python docstring for this function. 
@@ -53,6 +57,7 @@ class OpenAIClient(LLMClient):
             - No code examples in markdown blocks
             - Always return docstring with triple quotes before and after
             - Make sure to return all sections from the example output format
+            - Make sure to include an example if possible
 
             Example output format:
             /"/"/"
@@ -78,7 +83,7 @@ class OpenAIClient(LLMClient):
             max_tokens=settings.max_tokens,
             temperature=settings.temperature,
         )
-
+        print(response.model_dump_json())
         return str(response.choices[0].message.content)
 
 

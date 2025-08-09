@@ -8,18 +8,16 @@ class LLMClientFactory:
     @staticmethod
     def create_client(provider: str = "auto") -> LLMClient:
         """
-        Creates and returns an LLM client instance based on the specified provider.  
-        Defaults to automatically selecting an available client.
+        Creates a client for a language model based on the specified provider, automatically selecting Ollama if available, otherwise OpenAI.
         
         Args:
-            provider (str): The name of the provider to use ('auto', 'ollama', 'openai').
+            provider (str): The type of LLM provider to use ("auto", "ollama", or "openai"). Defaults to "auto".
         
         Returns:
-            LLMClient: An instance of the selected LLM client.
+            LLMClient: An instance of a language model client.
         
-        Raises:
-            RuntimeError: If no available client is found when provider is 'auto'.
-            ValueError: If an unknown provider is specified.
+        Example:
+            >>> create_client("auto")  # Attempts to select Ollama if available, otherwise OpenAI
         """
         if provider == "auto":
             # Try local options first

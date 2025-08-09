@@ -7,14 +7,17 @@ from src.utils.doc_insertion import find_closing_paren
 
 def main() -> None:
     """
-    Processes Python files in the ./src directory to generate and insert missing function docstrings using an LLM client.
-
+    Generates documentation for Python functions in specified files using a parser and an LLM client.
+    
+    Args:
+        None
+    
     Returns:
-        None: This function does not return a value.
+        None
     """
     # Find Python files
     parser = PythonParser()
-    llm_client = LLMClientFactory().create_client("openai")
+    llm_client = LLMClientFactory().create_client("ollama")
 
     for py_file in Path("./src").glob("**/*.py"):
         if py_file.name.startswith("test_"):

@@ -8,14 +8,13 @@ from src.core.analyzer import CodeElement, FileAnalysis
 class PythonParser:
     def parse_file(self, file_path: Path) -> FileAnalysis:
         """
-        Parses a Python file to extract functions and classes with their metadata.
-        Returns a FileAnalysis object containing the parsed elements.
-
+        Parses a Python file to extract functions and classes, returning their details including source code and docstrings.
+        
         Args:
-            file_path (Path): Path to the Python file to parse.
-
+            file_path (Path): The path to the Python file to be parsed.
+        
         Returns:
-            FileAnalysis: Object containing lists of functions and classes found.
+            FileAnalysis: An object containing the paths of the file and its parsed components such as functions and classes.
         """
         with open(file_path, "r") as f:
             content = f.read()
@@ -50,14 +49,14 @@ class PythonParser:
 
     def _get_source(self, node: ast.AST, content: str) -> str:
         """
-        Extract source code segment corresponding to an AST node from the given content.
-
+        Retrieves the source code of a given AST node from its content.
+        
         Args:
-            node (ast.AST): The AST node to extract source for.
-            content (str): The full source code as a string.
-
+            node (ast.AST): The abstract syntax tree node.
+            content (str): The string containing the full source code.
+        
         Returns:
-            str: The source code segment for the node, or an empty string if unavailable.
+            str: The source code of the specified AST node, or an empty string if not applicable.
         """
         lines = content.split("\n")
         if hasattr(node, "lineno") and hasattr(node, "end_lineno"):
